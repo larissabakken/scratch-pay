@@ -19,6 +19,9 @@ interface Query {
   type?: string;
 }
 
+/**
+ * @description Controller for the clinics endpoint
+ */
 const ClinicsController = {
   async getClinics(req: Request, res: Response) {
     try {

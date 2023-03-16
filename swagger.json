@@ -1,0 +1,152 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Scratch Pay API",
+    "description": "API for the Scratch Pay coding challenge",
+    "contact": {
+      "name": "Larissa Ramos",
+      "email": "devlarissasr@gmail.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3003"
+    }
+  ],
+  "paths": {
+    "/clinics": {
+      "get": {
+        "summary": "Get all clinics",
+        "description": "Retrieves all clinics from the database",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClinicArray"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    },
+    "/clinics/search": {
+      "get": {
+        "summary": "Get clinics by search parameters",
+        "description": "Retrieves clinics from the database that match the given search parameters",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name of the clinic to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "locale",
+            "in": "query",
+            "description": "Locale of the clinic to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "description": "Start date range to search clinics",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "End date range to search clinics",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            }
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Type of clinic to search for",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClinicArray"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Clinic": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Name of the clinic"
+          },
+          "locale": {
+            "type": "string",
+            "description": "Address of the clinic"
+          },
+          "type": {
+            "type": "string",
+            "description": "Type of the clinic"
+          },
+          "availability": {
+            "type": "object",
+            "properties": {
+              "from": {
+                "type": "string",
+                "description": "opening time of the clinic"
+              },
+              "to": {
+                "type": "string",
+                "description": "closing time of the clinic"
+              }
+            },
+            "description": "Availability of the clinic"
+          }
+        },
+        "required": ["name", "locale", "type", "availability"]
+      },
+      "ClinicArray": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Clinic"
+        }
+      }
+    }
+  }
+}

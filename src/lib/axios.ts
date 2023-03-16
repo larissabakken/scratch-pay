@@ -1,5 +1,8 @@
 import axios from "axios";
-
+/**
+ * 
+ * @returns  Array of dental clinics
+ */
 export const getDentalClinics = async () => {
   const response = await axios.get(
     "https://storage.googleapis.com/scratchpay-code-challenge/dental-clinics.json"
@@ -16,6 +19,10 @@ export const getDentalClinics = async () => {
   return data;
 };
 
+/**
+ * 
+ * @returns Array of vet clinics
+ */
 export const getVetClinics = async () => {
   const response = await axios.get(
     "https://storage.googleapis.com/scratchpay-code-challenge/vet-clinics.json"
