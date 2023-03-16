@@ -1,14 +1,13 @@
 import express from "express";
+import routes from "./routes";
 
 const PORT = 3003;
 const app = express();
 
-app.get("/api", (req, res) => {
-  res.send("I loke you more!");
-});
+app.use("/api", routes);
 
 app.use((req, res) => {
-    res.status(404).send("I loke you");
+    res.status(404).send("Not Found");
 });
 
 try {
